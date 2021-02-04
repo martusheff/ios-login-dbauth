@@ -19,11 +19,13 @@ struct ImageRegister: View {
                     .foregroundColor(.black)
                 Spacer()
                 
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                    Text("Create")
-                        .fontWeight(.heavy)
-                        .foregroundColor(Color.red)
+                if check() {
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                        Text("Create")
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.red)
                 })
+            }
             }
                 .padding(.top,30)
             Spacer(minLength: 0)
@@ -66,6 +68,14 @@ struct ImageRegister: View {
         .sheet(isPresented: $accountCreation.picker, content: {
             ImagePicker(show: $accountCreation.picker, ImageData: $accountCreation.images[currentImage])
         })
+    }
+    func check()->Bool{
+        for data in accountCreation.images {
+            if data.count == 0 {
+                return false
+            }
+        }
+        return true
     }
 }
 
